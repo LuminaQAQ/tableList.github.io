@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>庆莲社</title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+
+            height: 100%;
+            width: 100%;
+        }
+
+        .main-wrap {
+            height: 100%;
+        }
+
+        .header-wrap {
+            padding: 1rem;
+            padding-bottom: 0;
+
+            line-height: 1;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .body-wrap {
+            height: calc(100% - 12rem);
+        }
+
+        .footer-wrap {
+            padding: 1rem;
+        }
+
+        .table-wrap {
+            table-layout: fixed;
+            border-collapse: collapse;
+            text-align: center;
+
+            width: 90%;
+            height: 85%;
+        }
+
+        .table-wrap>tr {
+            height: 10%;
+        }
+
+        .to-page,
+        .data-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+
+            padding: 0.5rem;
+        }
+
+        .page-details {
+            display: flex;
+        }
+
+        .tr-blink-animation {
+            animation: blink 1s;
+        }
+
+        .search-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-keywords {
+            flex: 1 0 80%;
+            max-width: 80%;
+
+            border: 1px solid black;
+            border-radius: 8px;
+
+            line-height: 1.5rem;
+            font-size: 1.25rem;
+
+            padding: 0 .5rem;
+            margin: 0 .5rem;
+        }
+
+        .btn {
+            background-color: rgb(212, 234, 253);
+            border: 0;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .sound-icon-wrap {
+            width: 1rem;
+            height: 1rem;
+
+            object-fit: cover;
+        }
+
+        .sound-icon {
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes blink {
+            25% {
+                background-color: yellow;
+            }
+
+            50% {
+                background-color: transparent;
+            }
+
+            75% {
+                background-color: yellow;
+            }
+
+            100% {
+                background-color: transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrap">
+        <header class="header-wrap">
+            <section class="search-wrap">
+                <input type="number" name="" id="" class="search-keywords">
+                <input type="button" value="搜索" class="search-btn btn">
+            </section>
+        </header>
+        <section class="body-wrap">
+            <table class="table-wrap" border="1px" align="center">
+                <caption>
+                    <h3>庆莲社</h3>
+                </caption>
+                <thead>
+                    <th>序号</th>
+                    <th>名字</th>
+                    <td>播放</td>
+                </thead>
+                <tbody class="t-body"></tbody>
+            </table>
+        </section>
+        <footer class="footer-wrap">
+            <section class="to-page">
+                <section class="prev">
+                    <input value="上一页" class="prev btn" type="button">
+                </section>
+                <section class="next">
+                    <input value="下一页" class="next btn" type="button">
+                </section>
+            </section>
+            <section class="data-details">
+
+                <section class="page-details">
+                    <section>
+                        第 <span class="now-page"></span> 页
+                    </section>/
+                    <section>
+                        共 <span class="all-pages"></span> 页
+                    </section>
+                </section>
+
+                <section class="">
+                    共 <span class="data-count"></span> 条
+                </section>
+            </section>
+        </footer>
+    </div>
+
+    <script src="./asserts/data/qinglian.js"></script>
+    <script>
+        const nodeList = {
+            searchBtn: document.querySelector('.search-btn'),
+            searchKeywords: document.querySelector('.search-keywords'),
+
+            tBody: document.querySelector('.t-body'),
+
+            allPages: document.querySelector('.all-pages'),
+            nowPage: document.querySelector('.now-page'),
+            dataCount: document.querySelector('.data-count'),
+
+            prevBtn: document.querySelector('.prev'),
+            nextBtn: document.querySelector('.next'),
+        }
+
+        const speechAvailable = window.speechSynthesis;
+        if (!speechAvailable) alert("缺少TTS或该浏览器不支持语音播放！");
+
+        const toVoiceSystem = {
+            data: qinglian,
+            pageCur: 0,
+            body: nodeList.tBody,
+
+            allPages: nodeList.allPages,
+            nowPage: nodeList.nowPage,
+            dataCount: nodeList.dataCount,
+
+            keywordsInput: nodeList.searchKeywords,
+
+            createElement(type, obj) {
+                if (typeof obj !== "object" || (!obj.name && !obj.id)) return console.error("error");
+
+                const td = document.createElement("td");
+                td.className = "sound-icon-wrap";
+
+
+                if (speechAvailable) {
+                    const utter = new SpeechSynthesisUtterance();
+                    utter.lang = "zh-CN";
+
+                    const img = document.createElement("img");
+                    img.className = "sound-icon";
+                    img.src = "./asserts/img/喇叭.svg";
+                    td.appendChild(img);
+
+                    td.addEventListener('click', function () {
+                        utter.text = obj.name;
+                        utter.rate = 0.8;
+
+                        speechSynthesis.cancel();
+                        speechSynthesis.speak(utter);
+                    })
+                }
+
+                const templates = {
+                    tr_constructor: `
+                        <td>${obj.id}</td>
+                        <td>${obj.name}</td>
+                    `,
+                };
+
+                const n = document.createElement(type);
+                n.innerHTML = templates[type + "_constructor"];
+                n.appendChild(td);
+
+                return n;
+            },
+
+            changePage(flag) {
+                if (flag == "prev") this.prevFn();
+                else if (flag == "next") this.nextFn();
+            },
+
+            prevFn() {
+                if (this.pageCur == 0) this.pageCur = Math.floor(this.data.length / 10);
+                else --this.pageCur;
+
+                this.render();
+            },
+
+            nextFn() {
+                if (this.pageCur == Math.floor(this.data.length / 10)) this.pageCur = 0;
+                else ++this.pageCur;
+
+                this.render();
+            },
+
+            searchFn(val) {
+                if (val) val = Math.abs(Number(val));
+                if (!val || val == '0' || val > this.data.length || (!this.data[Number(val) - 1].id && !this.data[Number(val) - 1].name)) return alert("名单无此人！");
+
+
+                const keywords = val - 1;
+                const toPage = val % 10 == 0 ? Math.floor(val / 10) - 1 : Math.floor(val / 10);
+                this.pageCur = toPage;
+                this.render();
+
+                const trs = this.body.querySelectorAll('tr');
+                const tr = trs[val % 10 == 0 ? 9 : val % 10 - 1];
+                tr.className = "tr-blink-animation";
+                this.keywordsInput.value = "";
+            },
+
+            render() {
+                this.body.innerHTML = "";
+                this.allPages.innerHTML = Math.ceil(this.data.length / 10);
+                this.dataCount.innerHTML = this.data.length;
+                this.nowPage.innerHTML = this.pageCur + 1;
+
+                localStorage.setItem("ToVoiceSystem_pageCur_1", this.pageCur);
+
+                for (let i = this.pageCur * 10; i < this.pageCur * 10 + 10; i++) {
+                    if (this.data[i] && (this.data[i].id && this.data[i].name)) {
+                        const n = this.createElement("tr", this.data[i],);
+
+                        this.body.appendChild(n);
+                    }
+                }
+            },
+
+            init() {
+                const that = this;
+
+                const localPageCur = localStorage.getItem("ToVoiceSystem_pageCur_1");
+                if (!localPageCur) localStorage.setItem("ToVoiceSystem_pageCur_1", 0);
+                else this.pageCur = Number(localPageCur);
+
+                nodeList.prevBtn.addEventListener('click', function () {
+                    that.changePage("prev");
+                })
+
+                nodeList.nextBtn.addEventListener('click', function () {
+                    that.changePage("next");
+                })
+
+                nodeList.searchBtn.addEventListener('click', function () {
+                    that.searchFn(nodeList.searchKeywords.value);
+                })
+
+                this.render(this.body);
+            }
+        }
+
+        toVoiceSystem.init();
+    </script>
+</body>
+
+</html>
