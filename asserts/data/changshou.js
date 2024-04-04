@@ -490,7 +490,7 @@ const changshou =
         },
         {
             "id": "123",
-            "name": "蔡窦"
+            "name": "蔡坚"
         },
         {
             "id": "124",
@@ -622,7 +622,7 @@ const changshou =
         },
         {
             "id": "156",
-            "name": "斐黄"
+            "name": "黄斐"
         },
         {
             "id": "157",
@@ -1802,7 +1802,7 @@ const changshou =
         },
         {
             "id": "451",
-            "name": "榕修"
+            "name": "修榕"
         },
         {
             "id": "452",
@@ -2182,7 +2182,7 @@ const changshou =
         },
         {
             "id": "546",
-            "name": "钩林"
+            "name": "林娴"
         },
         {
             "id": "547",
@@ -2590,7 +2590,7 @@ const changshou =
         },
         {
             "id": "648",
-            "name": "邱"
+            "name": "邱璇"
         },
         {
             "id": "649",
@@ -2694,7 +2694,7 @@ const changshou =
         },
         {
             "id": "674",
-            "name": "婕俞"
+            "name": "俞婕"
         },
         {
             "id": "675",
@@ -2706,7 +2706,7 @@ const changshou =
         },
         {
             "id": "677",
-            "name": "振唐"
+            "name": "唐振"
         },
         {
             "id": "678",
@@ -4110,7 +4110,7 @@ const changshou =
         },
         {
             "id": "1028",
-            "name": "陈"
+            "name": "陈凯"
         },
         {
             "id": "1029",
@@ -4118,7 +4118,7 @@ const changshou =
         },
         {
             "id": "1030",
-            "name": "星崇阳"
+            "name": "呈崇阳"
         },
         {
             "id": "1031",
@@ -4314,7 +4314,7 @@ const changshou =
         },
         {
             "id": "1079",
-            "name": "玉陈"
+            "name": "陈玉"
         },
         {
             "id": "1080",
@@ -4606,7 +4606,7 @@ const changshou =
         },
         {
             "id": "1152",
-            "name": "茹谢"
+            "name": "谢茹"
         },
         {
             "id": "1153",
@@ -6810,7 +6810,7 @@ const changshou =
         },
         {
             "id": "1703",
-            "name": "谱郑"
+            "name": "郑谱"
         },
         {
             "id": "1704",
@@ -6970,7 +6970,7 @@ const changshou =
         },
         {
             "id": "1743",
-            "name": "艾"
+            "name": "艾飞"
         },
         {
             "id": "1744",
@@ -7578,7 +7578,7 @@ const changshou =
         },
         {
             "id": "1895",
-            "name": "展钟"
+            "name": "钟晨"
         },
         {
             "id": "1896",
@@ -10098,7 +10098,7 @@ const changshou =
         },
         {
             "id": "2525",
-            "name": "连莞"
+            "name": "连莹"
         },
         {
             "id": "2526",
@@ -10510,11 +10510,11 @@ const changshou =
         },
         {
             "id": "2628",
-            "name": "粉罗"
+            "name": "罗颖"
         },
         {
             "id": "2629",
-            "name": "水罗"
+            "name": "罗悦"
         },
         {
             "id": "2630",
@@ -10642,7 +10642,7 @@ const changshou =
         },
         {
             "id": "2661",
-            "name": "张建牌"
+            "name": "张建明"
         },
         {
             "id": "2662",
@@ -10968,6 +10968,6 @@ const changshou =
             "id": "2742",
             "name": "刘泽圣"
         }
-    ]
+    ];
 
 window.changshou = changshou;
