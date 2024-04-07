@@ -284,7 +284,7 @@
                 this.dataCount.innerHTML = this.data.length;
                 this.nowPage.innerHTML = this.pageCur + 1;
 
-                localStorage.setItem("ToVoiceSystem_pageCur_1", this.pageCur);
+                localStorage.setItem("ToVoiceSystem_pageCur_changshou", this.pageCur);
 
                 for (let i = this.pageCur * 10; i < this.pageCur * 10 + 10; i++) {
                     if (this.data[i] && (this.data[i].id && this.data[i].name)) {
@@ -298,8 +298,8 @@
             init() {
                 const that = this;
 
-                const localPageCur = localStorage.getItem("ToVoiceSystem_pageCur_1");
-                if (!localPageCur) localStorage.setItem("ToVoiceSystem_pageCur_1", 0);
+                const localPageCur = localStorage.getItem("ToVoiceSystem_pageCur_changshou");
+                if (!localPageCur) localStorage.setItem("ToVoiceSystem_pageCur_changshou", 0);
                 else this.pageCur = Number(localPageCur);
 
                 nodeList.prevBtn.addEventListener('click', function () {
