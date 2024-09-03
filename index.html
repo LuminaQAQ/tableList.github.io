@@ -106,6 +106,15 @@
             height: 100%;
         }
 
+        .tab-link {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .active-href {
+            color: #409EFF;
+        }
+
         @keyframes blink {
             25% {
                 background-color: yellow;
@@ -135,10 +144,15 @@
             </section>
         </header>
         <section class="body-wrap">
+            <div style="display: flex; justify-content: space-around;">
+                <a class="tab-link active-href" href="./index.html" target="_self">
+                    <h3>庆莲社的表格(现在在看的)</h3>
+                </a>
+                <a class="tab-link" href="./pages/changshou.html" target="_self">
+                    <h3>长寿会</h3>
+                </a>
+            </div>
             <table class="table-wrap" border="1px" align="center">
-                <caption>
-                    <h3>庆莲社</h3>
-                </caption>
                 <thead>
                     <th>序号</th>
                     <th>名字</th>
